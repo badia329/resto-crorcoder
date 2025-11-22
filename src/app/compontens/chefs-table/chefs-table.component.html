@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Experience</th>
+      <th scope="col">Speciality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let chef of chefsTab">
+      <th scope="row">{{ chef.id }}</th>
+      <td>{{ chef.name }}</td>
+      <td>{{ chef.experience }}</td>
+      <td>{{ chef.speciality }}</td>
+    </tr>
+  </tbody>
+</table>
