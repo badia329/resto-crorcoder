@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ChefComponent } from "../chef/chef.component";
 import { NgFor } from '@angular/common';
+import { Router } from '@angular/router';
+import { getFormlS } from '../../shared/genericFunction';
 
 @Component({
   selector: 'app-chefs',
@@ -9,9 +11,23 @@ import { NgFor } from '@angular/common';
   styleUrl: './chefs.component.css'
 })
 export class ChefsComponent {
-  chefsTab: any = [
-    { name: "Lara Bennett", experience: "Pastry Chef", speciality: "Cakes & Desserts", image: "img/team/chefs_2.png" },
-    { name: "Marco Rossi", experience: "Sous Chef", speciality: "Italian Cuisine", image: "img/team/chefs_3.png" },
-    { name: "Sofia Kim", experience: "Head Chef", speciality: "Asian Fusion", image: "img/team/chefs_1.png" },
-  ]
+    chefsTab: any = [];
+  constructor(private router: Router) {}
+  ngOnInit() {
+    this.chefsTab = getFormlS('chefsTab');
+  }
+  deleteMatch(teamId: any) {
+    for (let i = 0; i < this.chefsTab.length; i++) {
+      if (this.chefsTab[i].id === teamId) {
+        this.chefsTab.splice(i, 1);
+        break;
+      }
+    }
+  }
+  goToInfo(chefsId: any) {
+    this.router.navigate(['chefsInfo/' + chefsId]);
+  }
+  goToEdit(chefsId: any) {
+    this.router.navigate(['teamEdit/' + chefsId]);
+  }
 }

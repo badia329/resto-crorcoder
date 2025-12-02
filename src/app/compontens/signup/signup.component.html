@@ -1,0 +1,214 @@
+<section class="breadcrumb breadcrumb_bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb_iner text-center">
+          <div class="breadcrumb_iner_item">
+            <h2>sign up</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="contact-section section_padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <form [formGroup]="superVariable" class="form-contact contact_form">
+          <!-- First Name -->
+          <div class="form-group">
+            <input
+              type="text"
+              formControlName="firstName"
+              class="form-control"
+              placeholder="First Name"
+            />
+            <div
+              *ngIf="
+                superVariable.controls['firstName'].invalid &&
+                superVariable.controls['firstName'].touched
+              "
+            >
+              <div
+                *ngIf="superVariable.controls['firstName'].errors?.['required']"
+              >
+                First Name is required
+              </div>
+              <div
+                *ngIf="superVariable.controls['firstName'].errors?.['minlength']"
+              >
+                First Name must have at least 3 chars
+              </div>
+            </div>
+          </div>
+
+          <!-- Last Name -->
+          <div class="form-group">
+            <input
+              type="text"
+              formControlName="lastName"
+              class="form-control"
+              placeholder="Last Name"
+            />
+            <div
+              *ngIf="
+                superVariable.controls['lastName'].invalid &&
+                superVariable.controls['lastName'].touched
+              "
+            >
+              <div
+                *ngIf="superVariable.controls['lastName'].errors?.['required']"
+              >
+                Last Name is required
+              </div>
+              <div
+                *ngIf="superVariable.controls['lastName'].errors?.['minlength']"
+              >
+                Last Name must have at least 4 chars
+              </div>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Email"
+            />
+            <div
+              *ngIf="
+                superVariable.controls['email'].invalid &&
+                superVariable.controls['email'].touched
+              "
+            >
+              <div *ngIf="superVariable.controls['email'].errors?.['required']">
+                Email is required
+              </div>
+              <div *ngIf="superVariable.controls['email'].errors?.['email']">
+                Enter a valid email
+              </div>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control"
+              placeholder="Password"
+            />
+            <div
+              *ngIf="
+                superVariable.controls['password'].invalid &&
+                superVariable.controls['password'].touched
+              "
+            >
+              <div
+                *ngIf="superVariable.controls['password'].errors?.['required']"
+              >
+                Password is required
+              </div>
+              <div
+                *ngIf="superVariable.controls['password'].errors?.['minlength']"
+              >
+                Password must have at least 3 chars
+              </div>
+              <div
+                *ngIf="superVariable.controls['password'].errors?.['maxlength']"
+              >
+                Password must have max 10 chars
+              </div>
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-group">
+            <input
+              type="password"
+              formControlName="confirmPassword"
+              class="form-control"
+              placeholder="Confirm Password"
+            />
+            <div
+              *ngIf="
+                superVariable.controls['confirmPassword'].invalid &&
+                superVariable.controls['confirmPassword'].touched
+              "
+            >
+              <div
+                *ngIf="superVariable.controls['confirmPassword'].errors?.['required']"
+              >
+                Confirm Password is required
+              </div>
+              <div *ngIf="superVariable.errors?.['mismatch']">
+                Passwords do not match
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <input
+              type="tel"
+              formControlName="phone"
+              class="form-control"
+              placeholder="Phone"
+            />
+            <div
+              *ngIf="
+                superVariable.controls['phone'].invalid &&
+                superVariable.controls['phone'].touched
+              "
+            >
+              <div *ngIf="superVariable.controls['phone'].errors?.['required']">
+                Phone is required
+              </div>
+              <div *ngIf="superVariable.controls['phone'].errors?.['pattern']">
+                Enter a valid phone number
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <div class="form-group mt-3">
+            <input
+              type="submit"
+              (click)="signup()"
+              class="button button-contactForm btn_4"
+              value="sign up"
+            />
+          </div>
+        </form>
+      </div>
+
+       <div class="col-lg-4">
+        <div class="media contact-info">
+          <span class="contact-info__icon"><i class="ti-home"></i></span>
+          <div class="media-body">
+            <h3>Buttonwood, California.</h3>
+            <p>Rosemead, CA 91770</p>
+          </div>
+        </div>
+        <div class="media contact-info">
+          <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+          <div class="media-body">
+            <h3>00 (440) 9865 562</h3>
+            <p>Mon to Fri 9am to 6pm</p>
+          </div>
+        </div>
+        <div class="media contact-info">
+          <span class="contact-info__icon"><i class="ti-email"></i></span>
+          <div class="media-body">
+            <h3>support&#64;colorlib.com</h3>
+            <p>Send us your query anytime!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

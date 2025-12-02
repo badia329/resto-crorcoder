@@ -5,6 +5,7 @@
       <th scope="col">Name</th>
       <th scope="col">Experience</th>
       <th scope="col">Speciality</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +14,10 @@
       <td>{{ chef.name }}</td>
       <td>{{ chef.experience }}</td>
       <td>{{ chef.speciality }}</td>
+
+      <button class="btn btn-info mr-2" (click)="goToInfo(chef.id) ">Info</button>
+      <button class="btn btn-warning"  (click)="goToEdit(chef.id)">Edit</button>
+      <button class="btn btn-danger" (click)="deleteChef(chef.id)">Delete</button>
     </tr>
   </tbody>
 </table>
