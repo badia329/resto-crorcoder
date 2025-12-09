@@ -1,20 +1,25 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { generateId, getFormlS, setFormlS } from '../../shared/genericFunction';
+import { generateId } from '../../shared/genericFunction';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-menu',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './add-menu.component.html',
   styleUrl: './add-menu.component.css',
 })
 export class AddMenuComponent {
   obj: any = {};
-  addMenu() {
-    const T = getFormlS('menuTab');
-    this.obj.id = generateId(T);
-    T.push(this.obj);
-    setFormlS('menuTab', T);
-    console.log('here is chefs obj', this.obj);
+  addMenu(menuForm: any) {
+    if (menuForm.valid) {
+      const menuTab = JSON.parse(localStorage.getItem('menus') || '[]');
+      this.obj.id = generateId(menuTab);
+      menuTab.push(this.obj);
+      localStorage.setItem('menus', JSON.stringify(menuTab));
+      console.log('here is chefs obj', this.obj);
+      menuForm.resetForm();
+      this.obj = {};
+    }
   }
 }

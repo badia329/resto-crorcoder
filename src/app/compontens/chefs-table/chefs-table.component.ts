@@ -13,7 +13,7 @@ export class ChefsTableComponent {
  chefsTab: any = [];
   constructor(private router: Router) {}
   ngOnInit() {
-    this.chefsTab = getFormlS('chefsTab');
+    this.chefsTab = getFormlS('chefs');
   }
   deleteChef(chefsId: any) {
     for (let i = 0; i < this.chefsTab.length; i++) {

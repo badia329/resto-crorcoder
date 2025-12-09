@@ -13,7 +13,7 @@ export class MenuTableComponent {
   menuTab: any = [];
   constructor(private router: Router) {}
   ngOnInit() {
-    this.menuTab = getFormlS('menuTab');
+    this.menuTab = getFormlS('menus');
   }
   deleteMatch(menuId: any) {
     for (let i = 0; i < this.menuTab.length; i++) {
@@ -22,7 +22,7 @@ export class MenuTableComponent {
         break;
       }
     }
-    localStorage.setItem('menuTab', JSON.stringify(this.menuTab));
+    localStorage.setItem('menus', JSON.stringify(this.menuTab));
   }
   goToInfo(menuId: any) {
     this.router.navigate(['menuInfo/' + menuId]);
