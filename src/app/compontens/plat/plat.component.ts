@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './plat.component.css'
 })
 export class PlatComponent {
- @Input() platsData: any = {};
+ @Input() platData: any = {};
 }

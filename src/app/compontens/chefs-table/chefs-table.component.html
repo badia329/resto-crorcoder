@@ -12,7 +12,7 @@
     <tr *ngFor="let chef of chefsTab">
       <th scope="row">{{ chef.id }}</th>
       <td>{{ chef.name }}</td>
-      <td>{{ chef.experience }}</td>
+      <td>{{ chef.subject }}</td>
       <td>{{ chef.speciality }}</td>
 
       <button class="btn btn-info mr-2" (click)="goToInfo(chef.id) ">Info</button>

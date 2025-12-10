@@ -1,24 +1,17 @@
-<section class="breadcrumb breadcrumb_bg">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="breadcrumb_iner text-center">
-          <div class="breadcrumb_iner_item">
-            <h2>Edit Chef</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<app-banner-name title="Edit Chef"></app-banner-name>
 
 <section class="contact-section section_padding">
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
-        <form class="form-contact contact_form" (ngSubmit)="chefEdit()">
+        <form
+          class="form-contact contact_form"
+          #chefsForm="ngForm"
+          (ngSubmit)="chefEdit()"
+        >
           <div class="row">
             <div class="col-sm-6">
+              <!--Name-->
               <div class="form-group">
                 <input
                   class="form-control"
@@ -26,9 +19,21 @@
                   name="name"
                   type="text"
                   placeholder="Name"
+                  required
+                  minlength="5"
+                  #name="ngModel"
                 />
+                <div *ngIf="name.invalid && name.touched">
+                  <small class="text-danger" *ngIf="name.errors?.['required']"
+                    >Name is required</small
+                  >
+                  <small class="text-danger" *ngIf="name.errors?.['minlength']">
+                    Name must be at least 5 chars</small
+                  >
+                </div>
               </div>
             </div>
+            <!--Speciality-->
             <div class="col-sm-6">
               <div class="form-group">
                 <input
@@ -37,25 +42,72 @@
                   name="speciality"
                   type="text"
                   placeholder="Speciality"
+                  required
+                  #speciality="ngModel"
                 />
+                <div *ngIf="speciality.invalid && speciality.touched">
+                  <small
+                    class="text-danger"
+                    *ngIf="speciality.errors?.['required']"
+                    >Speciality is required</small
+                  >
+                </div>
               </div>
             </div>
-            <div class="col-12">
+            <!--Eperinece-->
+            <div class="col-6">
               <div class="form-group">
                 <input
                   class="form-control"
                   [(ngModel)]="obj.subject"
                   name="subject"
-                  type="text"
+                  type="number"
                   placeholder="Experience"
+                  required
+                  min="2"
+                  #experience="ngModel"
                 />
+                <div *ngIf="experience.invalid && experience.touched">
+                  <small
+                    class="text-danger"
+                    *ngIf="experience.errors?.['required']"
+                    >Experience is required</small
+                  >
+                  <small class="text-danger" *ngIf="experience.errors?.['min']"
+                    >Experience must be al least two years</small
+                  >
+                </div>
+              </div>
+            </div>
+            <!--Image URL-->
+            <div class="col-6">
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  [(ngModel)]="obj.image"
+                  name="image"
+                  type="url"
+                  placeholder="Image URL (https://example.com/image.jpg)"
+                  required
+                  #image="ngModel"
+                />
+                <div *ngIf="image.invalid && image.touched">
+                  <small class="text-danger" *ngIf="image.errors?.['required']"
+                    >Image URL is required</small
+                  >
+                </div>
               </div>
             </div>
           </div>
+
+          <!--Submit-->
           <div class="form-group mt-3">
-            <button type="submit" class="button button-contactForm btn_4">
-              Edit
-            </button>
+            <input
+              type="submit"
+              class="button button-contactForm btn_4"
+              value="Add"
+              [disabled]="chefsForm.invalid"
+            />
           </div>
         </form>
       </div>

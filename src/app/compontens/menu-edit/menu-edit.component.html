@@ -16,9 +16,13 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
-        <form class="form-contact contact_form" (ngSubmit)="chefEdit()">
+        <form
+          class="form-contact contact_form"
+          #menuForm="ngForm"
+          (ngSubmit)="menuEdit()"
+        >
           <div class="row">
-            <div class="col-12"></div>
+            <!--Name-->
             <div class="col-sm-6">
               <div class="form-group">
                 <input
@@ -27,9 +31,22 @@
                   name="name"
                   type="text"
                   placeholder="Name"
+                  required
+                  minlength="5"
+                  #name="ngModel"
                 />
+                <div *ngIf="name.invalid && name.touched">
+                  <small class="text-danger" *ngIf="name.errors?.['required']"
+                    >Name is required</small
+                  >
+                  <small class="text-danger" *ngIf="name.errors?.['minlength']">
+                    Name must be at least 5 chars</small
+                  >
+                </div>
               </div>
             </div>
+
+            <!--Description-->
             <div class="col-sm-6">
               <div class="form-group">
                 <input
@@ -38,28 +55,112 @@
                   name="description"
                   type="text"
                   placeholder="Description"
+                  required
+                  minlength="10"
+                  maxlength="100"
+                  #description="ngModel"
                 />
+                <div *ngIf="description.invalid && description.touched">
+                  <small
+                    class="text-danger"
+                    *ngIf="description.errors?.['required']"
+                    >Description is required</small
+                  >
+                  <small
+                    class="text-danger"
+                    *ngIf="description.errors?.['minlength']"
+                    >Description must be at least 100 chars</small
+                  >
+                </div>
               </div>
             </div>
+
+            <!--Price-->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  [(ngModel)]="obj.price" 
+                  name="price"
+                  type="number"
+                  placeholder="Price"
+                  required
+                  min="1"
+                  #price="ngModel"
+                />
+                <div *ngIf="price.invalid && price.touched">
+                  <small class="text-danger" *ngIf="price.errors?.['required']"
+                    >Price is required</small
+                  >
+                  <small class="text-danger" *ngIf="price.errors?.['min']"
+                    >Price must be greater than 0</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!--Category-->
+            <div class="col-sm-6">
+              <div class="form-group">
+                <select
+                  class="form-control"
+                  [(ngModel)]="obj.category"
+                  name="category"
+                  required
+                  #category="ngModel"
+                  disabled
+                >
+                  <option disabled [ngValue]="null">Select Category</option>
+                  <option value="Special">Special</option>
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Launch">Launch</option>
+                  <option value="Dinner">Dinner</option>
+                  <option value="Sneaks">Sneaks</option>
+                </select>
+
+                <div *ngIf="category.invalid && category.touched">
+                  <small
+                    class="text-danger"
+                    *ngIf="category.errors?.['required']"
+                    >Category is required</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!--Image URL-->
             <div class="col-12">
               <div class="form-group">
                 <input
                   class="form-control"
-                  [(ngModel)]="obj.prcie"
-                  name="prcie"
-                  type="text"
-                  placeholder="Price"
+                  [(ngModel)]="obj.image"
+                  name="image"
+                  type="url"
+                  placeholder="Image URL (https://example.com/image.jpg)"
+                  required
+                  #image="ngModel"
                 />
+                <div *ngIf="image.invalid && image.touched">
+                  <small class="text-danger" *ngIf="image.errors?.['required']"
+                    >Image URL is required</small
+                  >
+                </div>
               </div>
             </div>
           </div>
+
           <div class="form-group mt-3">
-            <button type="submit" class="button button-contactForm btn_4">
+            <button
+              type="submit"
+              class="button button-contactForm btn_4"
+              [disabled]="menuForm.invalid"
+            >
               Add
             </button>
           </div>
         </form>
       </div>
+
       <div class="col-lg-4">
         <div class="media contact-info">
           <span class="contact-info__icon"><i class="ti-home"></i></span>

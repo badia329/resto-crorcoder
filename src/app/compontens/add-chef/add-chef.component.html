@@ -67,7 +67,7 @@
               </div>
             </div>
             <!--Eperinece-->
-            <div class="col-12">
+            <div class="col-6">
               <div class="form-group">
                 <input
                   class="form-control"
@@ -91,7 +91,27 @@
                 </div>
               </div>
             </div>
+            <!--Image URL-->
+            <div class="col-6">
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  [(ngModel)]="obj.image"
+                  name="image"
+                  type="url"
+                  placeholder="Image URL (https://example.com/image.jpg)"
+                  required
+                  #image="ngModel"
+                />
+                <div *ngIf="image.invalid && image.touched">
+                  <small class="text-danger" *ngIf="image.errors?.['required']"
+                    >Image URL is required</small
+                  >
+                </div>
+              </div>
+            </div>
           </div>
+
           <!--Submit-->
           <div class="form-group mt-3">
             <input

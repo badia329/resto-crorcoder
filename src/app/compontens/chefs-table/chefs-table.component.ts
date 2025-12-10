@@ -7,10 +7,10 @@ import { getFormlS } from '../../shared/genericFunction';
   selector: 'app-chefs-table',
   imports: [NgFor],
   templateUrl: './chefs-table.component.html',
-  styleUrl: './chefs-table.component.css'
+  styleUrl: './chefs-table.component.css',
 })
 export class ChefsTableComponent {
- chefsTab: any = [];
+  chefsTab: any = [];
   constructor(private router: Router) {}
   ngOnInit() {
     this.chefsTab = getFormlS('chefs');
@@ -22,6 +22,7 @@ export class ChefsTableComponent {
         break;
       }
     }
+localStorage.setItem('chefs', JSON.stringify(this.chefsTab));
   }
   goToInfo(chefsId: any) {
     this.router.navigate(['chefInfo/' + chefsId]);
@@ -29,5 +30,4 @@ export class ChefsTableComponent {
   goToEdit(chefsId: any) {
     this.router.navigate(['chefEdit/' + chefsId]);
   }
-
 }
