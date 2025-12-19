@@ -4,8 +4,15 @@
   </div>
   <div class="single_blog_text text-center">
     <h3>{{ chefData.name }}</h3>
-    <p>{{ chefData.experience }}</p>
     <p>{{ chefData.speciality }}</p>
+    <p
+      [ngStyle]="{
+        color: getColor(chefData.experience),
+        'font-size': getFontSize(chefData.experience)
+      }"
+    >
+      {{ chefData.experience }} Years
+    </p>
     <div class="social_icon">
       <a href="#"> <i class="ti-facebook"></i></a>
       <a href="#"> <i class="ti-twitter-alt"></i> </a>
@@ -14,3 +21,6 @@
     </div>
   </div>
 </div>
+
+
+

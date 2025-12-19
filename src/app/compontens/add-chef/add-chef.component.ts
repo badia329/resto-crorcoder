@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { generateId} from '../../shared/genericFunction';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { ChefService } from '../../service/chef.service';
 
 @Component({
   selector: 'app-add-chef',
@@ -11,15 +11,11 @@ import { NgIf } from '@angular/common';
 })
 export class AddChefComponent {
   obj: any = {};
-  addChef(menuForm: any) {
-    if (menuForm.valid) {
-      const chefsTab = JSON.parse(localStorage.getItem('chefs') || '[]');
-      this.obj.id = generateId(chefsTab);
-      chefsTab.push(this.obj);
-      localStorage.setItem('chefs', JSON.stringify(chefsTab));
-      console.log('here is chefs obj', this.obj);
-      menuForm.resetForm();
-      this.obj = {};
-    }
+  constructor(private chefService: ChefService) {}
+  addChef() {
+    console.log('here is chefs obj', this.obj);
+    this.chefService.addChef(this.obj).subscribe((data) => {
+      console.log('Here is response from Be after adding match', data);
+    });
   }
 }

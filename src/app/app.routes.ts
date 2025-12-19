@@ -21,6 +21,8 @@ export const routes: Routes = [
     {path: "menu", component: MenuComponent},
     {path: "signin", component: SigninComponent},
     {path: "signup", component: SignupComponent},
+    {path: "signupAdmin", component: SignupComponent},
+    {path: "signupChef", component: SignupComponent},
     {path: "menuInfo/:id", component: MenuInfoComponent},
     {path: "menuEdit/:id", component: MenuEditComponent},
     {path: "chefInfo/:id", component: ChefInfoComponent},

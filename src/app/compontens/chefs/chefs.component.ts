@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ChefComponent } from "../chef/chef.component";
 import { CommonModule} from '@angular/common';
 import { Router } from '@angular/router';
-import { getFormlS } from '../../shared/genericFunction';
+import { ChefService } from '../../service/chef.service';
 
 @Component({
   selector: 'app-chefs',
@@ -12,17 +12,22 @@ import { getFormlS } from '../../shared/genericFunction';
 })
 export class ChefsComponent {
     chefsTab: any = [];
-  constructor(private router: Router) {}
+  constructor(private router: Router, private chefService: ChefService) {}
   ngOnInit() {
-    this.chefsTab = getFormlS('chefs');
+    this.chefService.getAllChefs().subscribe((data) => {
+      console.log('Here is data from BE', data);
+      this.chefsTab = data.tab
+    })
   }
-  deletechef(chefId: any) {
-    for (let i = 0; i < this.chefsTab.length; i++) {
-      if (this.chefsTab[i].id === chefId) {
-        this.chefsTab.splice(i, 1);
-        break;
+  deleteChef(chefId: string) {
+    this.chefService.deleteChef(chefId).subscribe((response) => {
+      console.log('Here is response after Chef delete', response);
+      if (response.isDeleted) {
+        this.chefService.getAllChefs().subscribe((data) => {
+          this.chefsTab = data.tab;
+        });
       }
-    }
+    });
   }
   goToInfo(chefsId: any) {
     this.router.navigate(['chefsInfo/' + chefsId]);

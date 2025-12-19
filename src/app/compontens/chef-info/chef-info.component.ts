@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BannerNameComponent } from '../banner-name/banner-name.component';
 import { ActivatedRoute } from '@angular/router';
+import { ChefService } from '../../service/chef.service';
 import { ChefComponent } from '../chef/chef.component';
 
 @Component({
@@ -10,17 +11,16 @@ import { ChefComponent } from '../chef/chef.component';
   styleUrl: './chef-info.component.css',
 })
 export class ChefInfoComponent {
-  chefData: any = [];
   foundChef: any = {};
-  constructor(private activatedRoute: ActivatedRoute) {}
-  ngOnInit() {
-    let id = this.activatedRoute.snapshot.params['id'];
-    this.chefData = JSON.parse(localStorage.getItem('chefs') || '[]');
-    for (let i = 0; i < this.chefData.length; i++) {
-      if (this.chefData[i].id == id) {
-      this.foundChef = this.chefData[i];
-      break;
+  constructor(private activatedRoute: ActivatedRoute, private chefService: ChefService) {}
+   ngOnInit() {
+    let chefId = this.activatedRoute.snapshot.params['id'];
+    this.chefService.getChefById(chefId).subscribe(
+      (response) => {
+        console.log("Here is object BE", response);
+        this.foundChef = response.obj;
       }
-    }
+    );
   }
 }
+

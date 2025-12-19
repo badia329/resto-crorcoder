@@ -3,7 +3,15 @@
   <div class="media-body align-self-center">
     <h3>{{ platData.name }}</h3>
     <p>{{ platData.description }}</p>
-    <p>{{ platData.price }} $</p>
-    <img  alt="{{ platData.name }}" />
+    <p
+      [ngClass]="{
+        cheap: platData.price < 21,
+        moderate: platData.price >= 21 && platData.price <= 45,
+        expensive: platData.price > 45
+      }"
+    >
+      {{ platData.price }} $
+    </p>
+    <img alt="{{ platData.name }}" />
   </div>
 </div>

@@ -1,11 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-plat',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './plat.component.html',
-  styleUrl: './plat.component.css'
+  styleUrl: './plat.component.css',
 })
 export class PlatComponent {
- @Input() platData: any = {};
+  @Input() platData: any = {};
+  
 }

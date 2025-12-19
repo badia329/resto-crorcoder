@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { getFormlS } from '../../shared/genericFunction';
+import { MenuService } from '../../service/menu.service';
 
 @Component({
   selector: 'app-menu-table',
@@ -11,23 +11,30 @@ import { getFormlS } from '../../shared/genericFunction';
 })
 export class MenuTableComponent {
   menuTab: any = [];
-  constructor(private router: Router) {}
+  constructor(private router: Router, private menuService: MenuService) {}
   ngOnInit() {
-    this.menuTab = getFormlS('menus');
-  }
-  deleteMatch(menuId: any) {
-    for (let i = 0; i < this.menuTab.length; i++) {
-      if (this.menuTab[i].id == menuId) {
-        this.menuTab.splice(i, 1);
-        break;
+    this.menuService.getAllMenus().subscribe(
+      (data) => {
+        console.log("Here is data from BE", data);
+        this.menuTab = data.tab;
       }
-    }
-    localStorage.setItem('menus', JSON.stringify(this.menuTab));
+    );
   }
-  goToInfo(menuId: any) {
+  deleteMenu(menuId: string) {
+   this.menuService.deleteMenu(menuId).subscribe((response) => {
+      console.log('Here is response after match delete', response);
+
+      if (response.isDeleted) {
+        this.menuService.getAllMenus().subscribe((data) => {
+          this.menuTab = data.tab;
+        });
+      }
+    });
+  }
+  goToInfo(menuId: string) {
     this.router.navigate(['menuInfo/' + menuId]);
   }
-  goToEdit(menuId: any) {
+  goToEdit(menuId: string) {
     this.router.navigate(['menuEdit/' + menuId]);
   }
 }

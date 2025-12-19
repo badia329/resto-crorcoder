@@ -3,25 +3,27 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Name</th>
+      <th scope="col">Category</th>
       <th scope="col">Price</th>
-      <th scope="col">description</th>
+      <th scope="col">Description</th>
       <th scope="col">Acitons</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of menuTab">
-      <th scope="row">{{ item.id }}</th>
+      <th scope="row">{{ item._id }}</th>
       <td>{{ item.name }}</td>
+      <td>{{ item.category }}</td>
       <td>{{ item.price }}</td>
       <td>{{ item.description }}</td>
       <td>
-        <button class="btn btn-info mr-2" (click)="goToInfo(item.id)">
+        <button class="btn btn-info mr-2" (click)="goToInfo(item._id)">
           Info
         </button>
-        <button class="btn btn-warning" (click)="goToEdit(item.id)">
+        <button class="btn btn-warning" (click)="goToEdit(item._id)">
           Edit
         </button>
-        <button class="btn btn-danger" (click)="deleteMatch(item.id)">
+        <button class="btn btn-danger" (click)="deleteMenu(item._id)">
           Delete
         </button>
       </td>

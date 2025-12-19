@@ -10,14 +10,14 @@
   </thead>
   <tbody>
     <tr *ngFor="let chef of chefsTab">
-      <th scope="row">{{ chef.id }}</th>
+      <th scope="row">{{ chef._id }}</th>
       <td>{{ chef.name }}</td>
       <td>{{ chef.subject }}</td>
       <td>{{ chef.speciality }}</td>
 
-      <button class="btn btn-info mr-2" (click)="goToInfo(chef.id) ">Info</button>
-      <button class="btn btn-warning"  (click)="goToEdit(chef.id)">Edit</button>
-      <button class="btn btn-danger" (click)="deleteChef(chef.id)">Delete</button>
+      <button class="btn btn-info mr-2" (click)="goToInfo(chef._id) ">Info</button>
+      <button class="btn btn-warning"  (click)="goToEdit(chef._id)">Edit</button>
+      <button class="btn btn-danger" (click)="deleteChef(chef._id)">Delete</button>
     </tr>
   </tbody>
 </table>

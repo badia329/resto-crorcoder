@@ -19,7 +19,7 @@
         <form
           class="form-contact contact_form"
           #chefsForm="ngForm"
-          (ngSubmit)="addChef(chefsForm)"
+          (ngSubmit)="addChef()"
         >
           <div class="row">
             <div class="col-sm-6">
@@ -71,8 +71,8 @@
               <div class="form-group">
                 <input
                   class="form-control"
-                  [(ngModel)]="obj.subject"
-                  name="subject"
+                  [(ngModel)]="obj.experience"
+                  name="experience"
                   type="number"
                   placeholder="Experience"
                   required
@@ -92,7 +92,7 @@
               </div>
             </div>
             <!--Image URL-->
-            <div class="col-6">
+            <!-- <div class="col-6">
               <div class="form-group">
                 <input
                   class="form-control"
@@ -109,7 +109,7 @@
                   >
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <!--Submit-->

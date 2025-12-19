@@ -4,6 +4,7 @@ import { getFormlS, setFormlS } from '../../shared/genericFunction';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BannerNameComponent } from '../banner-name/banner-name.component';
+import { ChefService } from '../../service/chef.service';
 
 @Component({
   selector: 'app-chef-edit',
@@ -13,27 +14,23 @@ import { BannerNameComponent } from '../banner-name/banner-name.component';
 })
 export class ChefEditComponent {
   obj: any = {};
-  constructor(private activedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activedRoute: ActivatedRoute,
+    private router: Router,
+    private chefService: ChefService
+  ) {}
   ngOnInit() {
     let id = this.activedRoute.snapshot.params['id'];
-    let chefs = JSON.parse(localStorage.getItem('chefs') || '[]');
-    for (let i = 0; i < chefs.length; i++) {
-      if (chefs[i].id == id) {
-        this.obj = chefs[i];
-        break;
-      }
-    }
+    this.chefService.getChefById(id).subscribe((data) => {
+      console.log('Here is data from BE', data);
+      this.obj = data.obj;
+    });
   }
   chefEdit() {
     console.log('here is new value', this.obj);
-    let chefs = JSON.parse(localStorage.getItem('chefs') || '[]');
-    for (let i = 0; i < chefs.length; i++) {
-      if (chefs[i].id == this.obj.id) {
-        chefs[i] = this.obj;
-        break;
-      }
-    }
-    localStorage.setItem("chefs", JSON.stringify(chefs))
-    this.router.navigate(['admin']);
+    this.chefService.editChef(this.obj).subscribe((data) => {
+      console.log('Here is data from BE', data);
+      this.router.navigate(['admin']);
+    });
   }
 }
